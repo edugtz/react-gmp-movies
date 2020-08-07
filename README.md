@@ -1,4 +1,4 @@
-# Movies - React GMP Task 1
+# Movies - React GMP
 
 ### Prerequisites
 
