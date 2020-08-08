@@ -38,18 +38,45 @@
     display: flex;
     justify-content: space-between;
     padding: 16px 0px;
+
+    .add-movie {
+      color: $primary-color;
+    }
+
+    .add-movie {
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 3px;
+      padding: 8px 8px;
+      background-color: rgba($color: #555555, $alpha: 0.3);
+    }
   }
 
-  .add-movie {
-    color: $primary-color;
-  }
+  .main-section {
+    width: 90%;
+    margin: 15px auto 0 auto;
 
-  .add-movie {
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    border-radius: 2px;
-    padding: 6px 8px;
-    background-color: rgba($color: #555555, $alpha: 0.8);
+    h2 {
+      color: $secondary-color;
+      font-weight: 100;
+      letter-spacing: 2px;
+    }
+
+    .search-section {
+      display: flex;
+      justify-content: space-between;
+      height: auto;
+      width: 100%;
+      margin: 25px 0 0 0;
+
+      .search-movies-button {
+        color: $secondary-color;
+        background-color: $primary-color;
+        border-radius: 3px;
+        padding: 0 40px;
+        border: none;
+      }
+    }
   }
 }

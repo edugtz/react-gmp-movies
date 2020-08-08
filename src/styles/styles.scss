@@ -18,6 +18,11 @@ body {
   font-family: Arial, sans-serif;
 }
 
+input:focus,
+button:focus {
+  outline: none;
+}
+
 .container {
   width: 90%;
   margin: 0 auto;
