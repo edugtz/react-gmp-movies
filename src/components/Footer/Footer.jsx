@@ -1,7 +1,15 @@
 import React from "react";
 
+import "./Footer.scss";
+
 const Footer = () => {
-  return <>Hi from footer</>;
+  return (
+    <footer className="footer">
+      <span className="app-title">
+        <b>netflix</b>roulette
+      </span>
+    </footer>
+  );
 };
 
 export default Footer;

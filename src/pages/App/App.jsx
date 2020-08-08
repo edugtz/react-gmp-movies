@@ -11,7 +11,12 @@ class App extends React.Component {
     return (
       <div id="app">
         <Header />
-        <Movies />
+        <div className="main-content">
+          <div className="container">
+            <span className="movie-results"><b>6</b> movies found</span>
+            <Movies />
+          </div>
+        </div>
         <Footer />
       </div>
     );
