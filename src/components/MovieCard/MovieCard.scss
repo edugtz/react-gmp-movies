@@ -1,41 +1,41 @@
 .movie-card {
-  height: 400px;
-  width: 300px;
-  color: #ffffff;
+    height: 400px;
+    width: 300px;
+    color: #ffffff;
 
-  .movie-image {
-    height: 80%;
-    width: 100%;
-    object-fit: contain;
+    .movie-image {
+        height: 80%;
+        width: 100%;
+        object-fit: contain;
 
-    img {
-      height: 100%;
-      width: 100%;
-    }
-  }
-
-  .movie-info {
-    height: auto;
-    margin: 10px 0;
-    display: flex;
-    justify-content: space-between;
-
-    .movie-title {
-      font-size: 1em;
+        img {
+            height: 100%;
+            width: 100%;
+        }
     }
 
-    .movie-description {
-      font-size: 0.8em;
-      margin: 5px 0 0 0;
-      color: #555555;
-    }
+    .movie-info {
+        height: auto;
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
 
-    .movie-year {
-      font-size: 0.75em;
-      border: 1px solid #ffffff;
-      font-weight: lighter;
-      padding: 3px 6px;
-      border-radius: 1px;
+        .movie-title {
+            font-size: 1em;
+        }
+
+        .movie-description {
+            font-size: 0.8em;
+            margin: 5px 0 0 0;
+            color: #555555;
+        }
+
+        .movie-year {
+            font-size: 0.75em;
+            border: 1px solid #ffffff;
+            font-weight: lighter;
+            padding: 3px 6px;
+            border-radius: 1px;
+        }
     }
-  }
 }

@@ -7,8 +7,8 @@ import App from "./pages/App/App";
 import "./styles/styles.scss";
 
 ReactDOM.render(
-  <ErrorBoundary>
-    <App />
-  </ErrorBoundary>,
-  document.getElementById("root")
+    <ErrorBoundary>
+        <App />
+    </ErrorBoundary>,
+    document.getElementById("root")
 );

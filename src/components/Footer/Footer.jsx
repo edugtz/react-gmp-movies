@@ -3,13 +3,13 @@ import React from "react";
 import "./Footer.scss";
 
 const Footer = () => {
-  return (
-    <footer className="footer">
-      <span className="app-title">
-        <b>netflix</b>roulette
+    return (
+        <footer className="footer">
+            <span className="app-title">
+                <b>netflix</b>roulette
       </span>
-    </footer>
-  );
+        </footer>
+    );
 };
 
 export default Footer;
