@@ -8,10 +8,8 @@ import "./App.scss";
 import MovieFilters from "../../components/MovieFilters/MovieFilters";
 
 class App extends React.Component {
-    constructor() {
-        this.state = {
-            isAddMovieModalOpen: false
-        }
+    state = {
+        isAddMovieModalOpen: false
     }
 
     toggleAddMovieModal = () => {
@@ -30,7 +28,10 @@ class App extends React.Component {
                         <div className="movie-results-container">
                             <span className="movie-results"><b>6</b> movies found</span>
                         </div>
-                        <Movies />
+                        <Movies
+                            isAddMovieModalOpen={this.state.isAddMovieModalOpen}
+                            toggleAddMovieModal={this.toggleAddMovieModal}
+                        />
                     </div>
                 </div>
                 <Footer />

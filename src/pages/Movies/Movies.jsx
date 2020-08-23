@@ -54,6 +54,7 @@ class Movies extends React.Component {
             <div className="movies">
                 <AddMovieModal
                     isModalOpen={this.props.isAddMovieModalOpen}
+                    toggleModalOpen={this.props.toggleAddMovieModal}
                 />
                 {movies.length &&
                     movies.map((movie, index) => (

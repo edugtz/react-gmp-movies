@@ -10,7 +10,7 @@ const Header = props => {
             <div className="container">
                 <div className="top-section">
                     <span className="app-title"><b>netflix</b>roulette</span>
-                    <button toggleAddMovieModal={props.toggleAddMovieModal} className="add-movie">+ ADD MOVIE</button>
+                    <button onClick={props.toggleAddMovieModal} className="add-movie">+ ADD MOVIE</button>
                 </div>
                 <div className="main-section">
                     <h2>FIND YOUR MOVIE</h2>
