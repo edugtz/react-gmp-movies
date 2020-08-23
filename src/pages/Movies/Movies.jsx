@@ -109,7 +109,11 @@ class Movies extends React.Component {
 
 Movies.propTypes = {
     toggleAddMovieModal: PropTypes.func.isRequired,
-    isAddMovieModalOpen: PropTypes.bool.isRequired
+    isAddMovieModalOpen: PropTypes.bool.isRequired,
+    toggleDeleteMovieModal: PropTypes.func.isRequired,
+    isDeleteModalOpen: PropTypes.bool.isRequired,
+    toggleEditMovieModal: PropTypes.func.isRequired,
+    isEditModalOpen: PropTypes.bool.isRequired
 }
 
 export default Movies;

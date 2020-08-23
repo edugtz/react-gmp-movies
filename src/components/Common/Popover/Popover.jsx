@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types"
 
 import './Popover.scss';
 
@@ -27,6 +28,13 @@ class Popover extends React.Component {
             </>
         )
     }
+}
+
+Popover.propTypes = {
+    onEditMovie: PropTypes.func.isRequired,
+    onDeleteMovie: PropTypes.func.isRequired,
+    toggleOpenMovieOptions: PropTypes.func.isRequired,
+    isPopoverOpen: PropTypes.bool.isRequired
 }
 
 export default Popover;
