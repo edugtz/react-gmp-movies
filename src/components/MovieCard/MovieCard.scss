@@ -3,6 +3,27 @@
     width: 300px;
     color: #ffffff;
 
+    .movie-options-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+        .movie-options {
+            margin: 3px 3px 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            z-index: 1000;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #232323;
+            opacity: 0.75;
+            cursor: pointer;
+        }
+    }
+
     .movie-image {
         height: 80%;
         width: 100%;

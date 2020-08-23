@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types"
 
 import "./Header.scss";
 import SearchBar from "../SearchBar/SearchBar";
@@ -23,5 +24,9 @@ const Header = props => {
         </header>
     );
 };
+
+Header.propTypes = {
+    toggleAddMovieModal: PropTypes.func.isRequired
+}
 
 export default Header;

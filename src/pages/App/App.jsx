@@ -9,11 +9,21 @@ import MovieFilters from "../../components/MovieFilters/MovieFilters";
 
 class App extends React.Component {
     state = {
-        isAddMovieModalOpen: false
+        isAddMovieModalOpen: false,
+        isDeleteModalOpen: false,
+        isEditModalOpen: false
     }
 
     toggleAddMovieModal = () => {
         this.setState((prevState) => ({ isAddMovieModalOpen: !prevState.isAddMovieModalOpen }))
+    }
+
+    toggleDeleteMovieModal = () => {
+        this.setState((prevState) => ({ isDeleteModalOpen: !prevState.isDeleteModalOpen }))
+    }
+
+    toggleEditMovieModal = () => {
+        this.setState((prevState) => ({ isEditModalOpen: !prevState.isEditModalOpen }))
     }
 
     render() {
@@ -31,6 +41,10 @@ class App extends React.Component {
                         <Movies
                             isAddMovieModalOpen={this.state.isAddMovieModalOpen}
                             toggleAddMovieModal={this.toggleAddMovieModal}
+                            isDeleteModalOpen={this.state.isDeleteModalOpen}
+                            toggleDeleteMovieModal={this.toggleDeleteMovieModal}
+                            isEditModalOpen={this.state.isEditModalOpen}
+                            toggleEditMovieModal={this.toggleEditMovieModal}
                         />
                     </div>
                 </div>

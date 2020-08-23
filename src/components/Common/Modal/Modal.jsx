@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types"
 
 import "./Modal.scss"
 
@@ -25,7 +26,7 @@ class Modal extends React.Component {
                 {this.props.isModalOpen &&
                     <div className="overlay">
                         <div className="modal-content">
-                            <div className="close-icon-container">
+                            <div className="close-icon-wrapper">
                                 <span onClick={this.props.toggleModalOpen} className="close-modal">
                                     <i className="fa fa-times"></i>
                                 </span>
@@ -38,6 +39,11 @@ class Modal extends React.Component {
 
         )
     }
+}
+
+Modal.propTypes = {
+    toggleModalOpen: PropTypes.func.isRequired,
+    isModalOpen: PropTypes.bool.isRequired
 }
 
 export default Modal;
