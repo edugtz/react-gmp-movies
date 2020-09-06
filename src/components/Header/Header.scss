@@ -1,9 +1,10 @@
 @import '../../styles/_variables';
 
 .header {
-    height: 256px;
+    min-height: 256px;
     width: 100%;
     display: flex;
+    max-height: 400px;
 
     &:before {
         content: '';
@@ -37,6 +38,7 @@
     .top-section {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 16px 0px;
 
         .add-movie {
@@ -50,6 +52,23 @@
             border-radius: 3px;
             padding: 8px 8px;
             background-color: rgba($color: #555555, $alpha: 0.3);
+        }
+
+        .search-icon-wrapper {
+            display: flex;
+            align-items: center;
+            min-height: 33px;
+
+            .search-toggle-icon {
+                color: $primary-color;
+                &:hover {
+                    cursor: pointer;
+                }
+
+                i {
+                    font-size: 20px;
+                }
+            }
         }
     }
 

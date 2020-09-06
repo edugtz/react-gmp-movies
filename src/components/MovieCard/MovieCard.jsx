@@ -6,7 +6,7 @@ import Popover from "../Common/Popover/Popover";
 
 const MovieCard = props => {
     const [isPopoverOpen, setPopoverOpen] = React.useState(false);
-    const { title, description, img, year } = props.movie;
+    const { id, title, genre, img, year } = props.movie;
 
     const toggleOpenMovieOptions = () => {
         setPopoverOpen(prevState => !prevState)
@@ -14,7 +14,7 @@ const MovieCard = props => {
 
     const onSelectedMovieOptions = () => {
         toggleOpenMovieOptions();
-        props.setSelectedMovie(props.movie.id);
+        props.setSelectedMovie(id);
     }
 
     const onDeleteMovie = () => {
@@ -28,7 +28,7 @@ const MovieCard = props => {
     }
 
     return (
-        <div className="movie-card">
+        <div className="movie-card" onClick={() => props.setSelectedMovie(id)}>
             <div className="movie-options-wrapper">
                 <span onClick={onSelectedMovieOptions} className="movie-options"><i className="fa fa-ellipsis-v"></i></span>
                 <Popover
@@ -44,7 +44,7 @@ const MovieCard = props => {
             <div className="movie-info">
                 <div className="left-section">
                     <p className="movie-title">{title}</p>
-                    <p className="movie-description">{description}</p>
+                    <p className="movie-genre">{genre}</p>
                 </div>
                 <div className="right-section">
                     <span className="movie-year">{year}</span>
@@ -57,7 +57,7 @@ const MovieCard = props => {
 MovieCard.propTypes = {
     movie: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
         img: PropTypes.string.isRequired,
         year: PropTypes.string.isRequired,
     }).isRequired

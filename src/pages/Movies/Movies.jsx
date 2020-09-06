@@ -8,85 +8,28 @@ import DeleteMovieModal from "../../components/DeleteMovieModal/DeleteMovieModal
 import "./Movies.scss";
 import EditMovieModal from "../../components/EditMovieModal/EditMovieModal";
 
-const movies = [
-    {
-        id: 1,
-        title: "Pulp Fiction",
-        img: "../../../public/images/pulp-fiction.jpg",
-        description: "Action & Adventure",
-        genre: "action",
-        year: "2004"
-    },
-    {
-        id: 2,
-        title: "Bohemian Rhapsody",
-        img: "../../../public//images/bohemian-rhapsody.jpg",
-        description: "Drama, Biography, Music",
-        genre: "drama",
-        year: "2018"
-    },
-    {
-        id: 3,
-        title: "Kill Bill: Vol 2",
-        img: "../../../public//images/kill-bill2.jpg",
-        description: "Oscar winning movie",
-        genre: "action",
-        year: "2004"
-    },
-    {
-        id: 4,
-        title: "Avengers: Infinity War",
-        img: "../../../public//images/avengers-infinity.jpg",
-        description: "Action & Adventure",
-        genre: "action",
-        year: "2018"
-    },
-    {
-        id: 5,
-        title: "Inception",
-        img: "../../../public//images/inception.jpg",
-        description: "Action & Adventure",
-        genre: "thriller",
-        year: "2010"
-    },
-    {
-        id: 6,
-        title: "Reservoir dogs",
-        img: "../../../public//images/reservoir-dogs.jpg",
-        description: "Oscar winning movie",
-        genre: "crime",
-        year: "1992"
-    }
-];
-
 const Movies = props => {
-    const [selectedMovie, setSelectedMovie] = React.useState(-1);
-
-    const updateSelectedMovie = (movieId) => {
-        const selectedMovie = movies.findIndex(movie => movie.id === movieId);
-
-        setSelectedMovie(selectedMovie);
-    }
-
+    const { movies, selectedMovieId, isAddMovieModalOpen, isDeleteModalOpen, isEditModalOpen, toggleAddMovieModal,
+        toggleDeleteMovieModal, toggleEditMovieModal, updateSelectedMovie } = props;
     return (
         <div className="movies">
-            {selectedMovie !== -1 && (
+            {selectedMovieId !== -1 && (
                 <>
                     <DeleteMovieModal
-                        movie={movies[selectedMovie]}
-                        isModalOpen={props.isDeleteModalOpen}
-                        toggleModalOpen={props.toggleDeleteMovieModal}
+                        movie={movies[selectedMovieId]}
+                        isModalOpen={isDeleteModalOpen}
+                        toggleModalOpen={toggleDeleteMovieModal}
                     />
                     <EditMovieModal
-                        movie={movies[selectedMovie]}
-                        isModalOpen={props.isEditModalOpen}
-                        toggleModalOpen={props.toggleEditMovieModal}
+                        movie={movies[selectedMovieId]}
+                        isModalOpen={isEditModalOpen}
+                        toggleModalOpen={toggleEditMovieModal}
                     />
                 </>
             )}
             <AddMovieModal
-                isModalOpen={props.isAddMovieModalOpen}
-                toggleModalOpen={props.toggleAddMovieModal}
+                isModalOpen={isAddMovieModalOpen}
+                toggleModalOpen={toggleAddMovieModal}
             />
             {movies.length &&
                 movies.map((movie, index) => (
@@ -94,8 +37,8 @@ const Movies = props => {
                         key={`${movie.title}${index}`}
                         movie={movie}
                         setSelectedMovie={updateSelectedMovie}
-                        toggleDeleteMovieModal={props.toggleDeleteMovieModal}
-                        toggleEditMovieModal={props.toggleEditMovieModal}
+                        toggleDeleteMovieModal={toggleDeleteMovieModal}
+                        toggleEditMovieModal={toggleEditMovieModal}
                     />
                 ))}
         </div>
@@ -108,7 +51,15 @@ Movies.propTypes = {
     toggleDeleteMovieModal: PropTypes.func.isRequired,
     isDeleteModalOpen: PropTypes.bool.isRequired,
     toggleEditMovieModal: PropTypes.func.isRequired,
-    isEditModalOpen: PropTypes.bool.isRequired
+    isEditModalOpen: PropTypes.bool.isRequired,
+    updateSelectedMovie: PropTypes.func.isRequired,
+    selectedMovieId: PropTypes.number.isRequired,
+    movies: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+        year: PropTypes.string.isRequired,
+    })).isRequired
 }
 
 export default Movies;
