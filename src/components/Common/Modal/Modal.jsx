@@ -3,42 +3,52 @@ import PropTypes from "prop-types"
 
 import "./Modal.scss"
 
-class Modal extends React.Component {
-    componentDidMount() {
-        if (this.props.isModalOpen) {
+// Custom hook
+function usePrevious(value) {
+    const ref = React.useRef();
+    React.useEffect(() => {
+        ref.current = value;
+    });
+    return ref.current;
+}
+
+const Modal = props => {
+    const prevIsModalOpen = usePrevious(props.isModalOpen);
+
+    React.useEffect(() => {
+        if (props.isModalOpen) {
             document.body.style.overflow = 'hidden'
         }
-    }
 
-    componentWillUnmount() {
-        document.body.style.overflow = 'unset';
-    }
+        return () => {
+            document.body.style.overflow = 'unset';
+        }
+    }, []);
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.isModalOpen !== this.props.isModalOpen && this.props.isModalOpen) {
+    React.useEffect(() => {
+        if (prevIsModalOpen !== props.isModalOpen && props.isModalOpen) {
             document.body.style.overflow = 'hidden'
         } else document.body.style.overflow = 'unset'
-    }
+    }, [props.isModalOpen])
 
-    render() {
-        return (
-            <>
-                {this.props.isModalOpen &&
-                    <div className="overlay">
-                        <div className="modal-content">
-                            <div className="close-icon-wrapper">
-                                <span onClick={this.props.toggleModalOpen} className="close-modal">
-                                    <i className="fa fa-times"></i>
-                                </span>
-                            </div>
-                            {this.props.children}
+
+    return (
+        <>
+            {props.isModalOpen &&
+                <div className="overlay">
+                    <div className="modal-content">
+                        <div className="close-icon-wrapper">
+                            <span onClick={props.toggleModalOpen} className="close-modal">
+                                <i className="fa fa-times"></i>
+                            </span>
                         </div>
+                        {props.children}
                     </div>
-                }
-            </>
+                </div>
+            }
+        </>
 
-        )
-    }
+    );
 }
 
 Modal.propTypes = {

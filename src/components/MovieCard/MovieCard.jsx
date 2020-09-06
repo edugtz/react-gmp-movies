@@ -4,61 +4,55 @@ import PropTypes from "prop-types"
 import "./MovieCard.scss";
 import Popover from "../Common/Popover/Popover";
 
-class MovieCard extends React.Component {
+const MovieCard = props => {
+    const [isPopoverOpen, setPopoverOpen] = React.useState(false);
+    const { title, description, img, year } = props.movie;
 
-    state = {
-        isPopoverOpen: false
+    const toggleOpenMovieOptions = () => {
+        setPopoverOpen(prevState => !prevState)
     }
 
-    onSelectedMovieOptions = () => {
-        this.toggleOpenMovieOptions();
-        this.props.setSelectedMovie(this.props.movie.id);
+    const onSelectedMovieOptions = () => {
+        toggleOpenMovieOptions();
+        props.setSelectedMovie(props.movie.id);
     }
 
-    toggleOpenMovieOptions = () => {
-        this.setState((prevState) => ({ isPopoverOpen: !prevState.isPopoverOpen }))
+    const onDeleteMovie = () => {
+        onSelectedMovieOptions();
+        props.toggleDeleteMovieModal();
     }
 
-    onDeleteMovie = () => {
-        this.onSelectedMovieOptions();
-        this.props.toggleDeleteMovieModal();
+    const onEditMovie = () => {
+        onSelectedMovieOptions();
+        props.toggleEditMovieModal();
     }
 
-    onEditMovie = () => {
-        this.onSelectedMovieOptions();
-        this.props.toggleEditMovieModal();
-    }
-
-    render() {
-        const { id, title, description, img, year } = this.props.movie;
-
-        return (
-            <div className="movie-card">
-                <div className="movie-options-wrapper">
-                    <span onClick={this.onSelectedMovieOptions} className="movie-options"><i className="fa fa-ellipsis-v"></i></span>
-                    <Popover
-                        toggleOpenMovieOptions={this.toggleOpenMovieOptions}
-                        isPopoverOpen={this.state.isPopoverOpen}
-                        onDeleteMovie={this.onDeleteMovie}
-                        onEditMovie={this.onEditMovie}
-                    />
+    return (
+        <div className="movie-card">
+            <div className="movie-options-wrapper">
+                <span onClick={onSelectedMovieOptions} className="movie-options"><i className="fa fa-ellipsis-v"></i></span>
+                <Popover
+                    toggleOpenMovieOptions={toggleOpenMovieOptions}
+                    isPopoverOpen={isPopoverOpen}
+                    onDeleteMovie={onDeleteMovie}
+                    onEditMovie={onEditMovie}
+                />
+            </div>
+            <div className="movie-image">
+                <img src={img} alt={title} />
+            </div>
+            <div className="movie-info">
+                <div className="left-section">
+                    <p className="movie-title">{title}</p>
+                    <p className="movie-description">{description}</p>
                 </div>
-                <div className="movie-image">
-                    <img src={img} alt={title} />
-                </div>
-                <div className="movie-info">
-                    <div className="left-section">
-                        <p className="movie-title">{title}</p>
-                        <p className="movie-description">{description}</p>
-                    </div>
-                    <div className="right-section">
-                        <span className="movie-year">{year}</span>
-                    </div>
+                <div className="right-section">
+                    <span className="movie-year">{year}</span>
                 </div>
             </div>
-        );
-    }
-};
+        </div>
+    );
+}
 
 MovieCard.propTypes = {
     movie: PropTypes.shape({
