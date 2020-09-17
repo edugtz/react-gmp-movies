@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types"
+import * as moment from 'moment';
 
 import "./MovieCard.scss";
 import Popover from "../Common/Popover/Popover";
 
 const MovieCard = props => {
     const [isPopoverOpen, setPopoverOpen] = React.useState(false);
-    const { id, title, genre, img, year } = props.movie;
+    const { id, title, genres, poster_path, release_date } = props.movie;
+    const movieYear = moment(release_date).format('Y');
+    const genresToBeDisplayed = genres.join(", ");
 
     const toggleOpenMovieOptions = () => {
         setPopoverOpen(prevState => !prevState)
@@ -39,15 +42,15 @@ const MovieCard = props => {
                 />
             </div>
             <div className="movie-image">
-                <img src={img} alt={title} />
+                <img src={poster_path} alt={title} />
             </div>
             <div className="movie-info">
                 <div className="left-section">
                     <p className="movie-title">{title}</p>
-                    <p className="movie-genre">{genre}</p>
+                    <p className="movie-genre">{genresToBeDisplayed}</p>
                 </div>
                 <div className="right-section">
-                    <span className="movie-year">{year}</span>
+                    <span className="movie-year">{movieYear}</span>
                 </div>
             </div>
         </div>
@@ -57,9 +60,9 @@ const MovieCard = props => {
 MovieCard.propTypes = {
     movie: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        genre: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
-        year: PropTypes.string.isRequired,
+        genres: PropTypes.array.isRequired,
+        poster_path: PropTypes.string.isRequired,
+        release_date: PropTypes.string.isRequired,
     }).isRequired
 }
 

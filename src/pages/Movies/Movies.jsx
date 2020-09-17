@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types"
+import { connect } from 'react-redux';
 
 import MovieCard from "../../components/MovieCard/MovieCard";
 import AddMovieModal from "../../components/AddMovieModal/AddMovieModal";
 import DeleteMovieModal from "../../components/DeleteMovieModal/DeleteMovieModal";
+import EditMovieModal from "../../components/EditMovieModal/EditMovieModal";
 
 import "./Movies.scss";
-import EditMovieModal from "../../components/EditMovieModal/EditMovieModal";
 
 const Movies = props => {
     const { movies, selectedMovieId, isAddMovieModalOpen, isDeleteModalOpen, isEditModalOpen, toggleAddMovieModal,
         toggleDeleteMovieModal, toggleEditMovieModal, updateSelectedMovie } = props;
+
     return (
         <div className="movies">
             {selectedMovieId !== -1 && (
@@ -56,10 +58,23 @@ Movies.propTypes = {
     selectedMovieId: PropTypes.number.isRequired,
     movies: PropTypes.arrayOf(PropTypes.shape({
         title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
-        year: PropTypes.string.isRequired,
+        genres: PropTypes.array.isRequired,
+        poster_path: PropTypes.string.isRequired,
+        release_date: PropTypes.string.isRequired,
     })).isRequired
 }
 
-export default Movies;
+
+const mapStateToProps = (state) => {
+    const { movies, totalMovies } = state.movies;
+
+    return {
+        movies,
+        totalMovies
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(Movies);
