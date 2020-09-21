@@ -11,7 +11,22 @@ export default function moviesReducer(state = initialState, action) {
             };
         case 'UPDATE_MOVIE':
             return {
-                ...state
+                ...state,
+                movies: state.movies.map((movie) => {
+                    if (movie.id === action.movie.id) {
+                        return action.movie;
+                    }
+
+                    return movie;
+                })
+            }
+        case 'CREATE_MOVIE':
+            return {
+                ...state,
+                movies: [
+                    ...state.movies,
+                    action.movie
+                ]
             }
         default:
             return state;

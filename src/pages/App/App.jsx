@@ -17,7 +17,6 @@ const App = props => {
     const [isAddMovieModalOpen, setAddMovieModal] = React.useState(false);
     const [isDeleteModalOpen, setDeleteMovieModal] = React.useState(false);
     const [isEditModalOpen, setEditMovieModal] = React.useState(false);
-    const [fetchedMovies, setFetchedMovies] = React.useState(false);
 
     const toggleAddMovieModal = () => {
         setAddMovieModal(prevState => !prevState)
@@ -31,19 +30,17 @@ const App = props => {
         setEditMovieModal(prevState => !prevState)
     }
 
-    const [selectedMovieId, setSelectedMovie] = React.useState(-1);
+    const [selectedMovie, setSelectedMovie] = React.useState({});
 
-    const updateSelectedMovie = (movieId) => {
-        const selectedMovieIndex = movieList.findIndex(movie => movie.id === movieId);
+    const updateSelectedMovie = (movieData) => {
+        const foundMovie = movies.find(movie => movie.id === movieData.id);
 
-        setSelectedMovie(selectedMovieIndex);
+        setSelectedMovie(foundMovie);
     }
 
     React.useEffect(() => {
         props.getMoviesData()
             .then(() => {
-                setFetchedMovies(true);
-                if (fetchedMovies) console.log(props.movies);
             })
             .catch(err => {
                 console.log(err.message);
@@ -54,8 +51,7 @@ const App = props => {
         <div id="app">
             <Header
                 toggleAddMovieModal={toggleAddMovieModal}
-                selectedMovieId={selectedMovieId}
-                selectedMovie={movies[selectedMovieId]}
+                selectedMovie={selectedMovie}
                 updateSelectedMovie={updateSelectedMovie}
             />
             <div className="main-content">
@@ -72,7 +68,7 @@ const App = props => {
                         isEditModalOpen={isEditModalOpen}
                         toggleEditMovieModal={toggleEditMovieModal}
                         updateSelectedMovie={updateSelectedMovie}
-                        selectedMovieId={selectedMovieId}
+                        selectedMovie={selectedMovie}
                     />
                 </div>
             </div>
@@ -88,9 +84,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     const { movies } = state.movies;
 
-    return {
-        movies
-    };
+    return { movies };
 };
 
 export default connect(

@@ -1,13 +1,18 @@
-import { getMovies } from '../../api/api';
+import { getMovies, updateMovie, createMovie } from '../../api/api';
 
 const getMoviesAction = movies => ({
     type: 'GET_MOVIES',
     movies
 });
 
-const updateMovieAction = movieId => ({
+const updateMovieAction = movieData => ({
     type: 'UPDATE_MOVIE',
-    movieId
+    movie: movieData
+});
+
+const createMovieAction = movieData => ({
+    type: 'CREATE_MOVIE',
+    movie: movieData
 });
 
 export const getMoviesData = () => {
@@ -24,11 +29,25 @@ export const getMoviesData = () => {
     }
 }
 
-export const updateMovie = id => {
+export const updateMovieData = data => {
     return dispatch => {
-        return updateMovie(id)
+        return updateMovie(data)
             .then(response => {
-                dispatch(updateMovieAction(response.data.data));
+                dispatch(updateMovieAction(response.data));
+
+                return response;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+}
+
+export const createMovieData = data => {
+    return dispatch => {
+        return createMovie(data)
+            .then(response => {
+                dispatch(createMovieAction(response.data));
 
                 return response;
             })

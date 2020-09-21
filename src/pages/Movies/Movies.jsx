@@ -10,20 +10,20 @@ import EditMovieModal from "../../components/EditMovieModal/EditMovieModal";
 import "./Movies.scss";
 
 const Movies = props => {
-    const { movies, selectedMovieId, isAddMovieModalOpen, isDeleteModalOpen, isEditModalOpen, toggleAddMovieModal,
+    const { movies, selectedMovie, isAddMovieModalOpen, isDeleteModalOpen, isEditModalOpen, toggleAddMovieModal,
         toggleDeleteMovieModal, toggleEditMovieModal, updateSelectedMovie } = props;
 
     return (
         <div className="movies">
-            {selectedMovieId !== -1 && (
+            {selectedMovie && Object.keys(selectedMovie).length !== 0 && (
                 <>
                     <DeleteMovieModal
-                        movie={movies[selectedMovieId]}
+                        movie={selectedMovie}
                         isModalOpen={isDeleteModalOpen}
                         toggleModalOpen={toggleDeleteMovieModal}
                     />
                     <EditMovieModal
-                        movie={movies[selectedMovieId]}
+                        movie={selectedMovie}
                         isModalOpen={isEditModalOpen}
                         toggleModalOpen={toggleEditMovieModal}
                     />
@@ -38,7 +38,7 @@ const Movies = props => {
                     <MovieCard
                         key={`${movie.title}${index}`}
                         movie={movie}
-                        setSelectedMovie={updateSelectedMovie}
+                        updateSelectedMovie={updateSelectedMovie}
                         toggleDeleteMovieModal={toggleDeleteMovieModal}
                         toggleEditMovieModal={toggleEditMovieModal}
                     />
@@ -55,7 +55,7 @@ Movies.propTypes = {
     toggleEditMovieModal: PropTypes.func.isRequired,
     isEditModalOpen: PropTypes.bool.isRequired,
     updateSelectedMovie: PropTypes.func.isRequired,
-    selectedMovieId: PropTypes.number.isRequired,
+    selectedMovie: PropTypes.object,
     movies: PropTypes.arrayOf(PropTypes.shape({
         title: PropTypes.string.isRequired,
         genres: PropTypes.array.isRequired,

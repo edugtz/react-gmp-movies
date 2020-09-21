@@ -7,7 +7,7 @@ import Popover from "../Common/Popover/Popover";
 
 const MovieCard = props => {
     const [isPopoverOpen, setPopoverOpen] = React.useState(false);
-    const { id, title, genres, poster_path, release_date } = props.movie;
+    const { title, genres, poster_path, release_date } = props.movie;
     const movieYear = moment(release_date).format('Y');
     const genresToBeDisplayed = genres.join(", ");
 
@@ -15,25 +15,22 @@ const MovieCard = props => {
         setPopoverOpen(prevState => !prevState)
     }
 
-    const onSelectedMovieOptions = () => {
-        toggleOpenMovieOptions();
-        props.setSelectedMovie(id);
-    }
-
     const onDeleteMovie = () => {
-        onSelectedMovieOptions();
+        toggleOpenMovieOptions();
+        props.updateSelectedMovie(props.movie);
         props.toggleDeleteMovieModal();
     }
 
     const onEditMovie = () => {
-        onSelectedMovieOptions();
+        toggleOpenMovieOptions();
+        props.updateSelectedMovie(props.movie);
         props.toggleEditMovieModal();
     }
 
     return (
-        <div className="movie-card" onClick={() => props.setSelectedMovie(id)}>
+        <div className="movie-card">
             <div className="movie-options-wrapper">
-                <span onClick={onSelectedMovieOptions} className="movie-options"><i className="fa fa-ellipsis-v"></i></span>
+                <span onClick={toggleOpenMovieOptions} className="movie-options"><i className="fa fa-ellipsis-v"></i></span>
                 <Popover
                     toggleOpenMovieOptions={toggleOpenMovieOptions}
                     isPopoverOpen={isPopoverOpen}
