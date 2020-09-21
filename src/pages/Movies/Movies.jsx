@@ -33,7 +33,7 @@ const Movies = props => {
                 isModalOpen={isAddMovieModalOpen}
                 toggleModalOpen={toggleAddMovieModal}
             />
-            {movies.length &&
+            {movies.length > 0 &&
                 movies.map((movie, index) => (
                     <MovieCard
                         key={`${movie.title}${index}`}
@@ -59,7 +59,7 @@ Movies.propTypes = {
     movies: PropTypes.arrayOf(PropTypes.shape({
         title: PropTypes.string.isRequired,
         genres: PropTypes.array.isRequired,
-        poster_path: PropTypes.string.isRequired,
+        poster_path: PropTypes.string,
         release_date: PropTypes.string.isRequired,
     })).isRequired
 }

@@ -7,7 +7,7 @@ const ROUTES = {
 };
 
 export const getMovies = () => {
-    return api.get(`${baseUrl}/${ROUTES.movies}`, { params: { limit: 100, offset: 1 } });
+    return api.get(`${baseUrl}/${ROUTES.movies}`, { params: { limit: 4000, offset: 1 } });
 };
 
 export const createMovie = (data) => {
@@ -19,5 +19,5 @@ export const updateMovie = (data) => {
 };
 
 export const deleteMovie = (id) => {
-    return api.put(`${baseUrl}/${ROUTES.movies}/${id}`);
+    return api.delete(`${baseUrl}/${ROUTES.movies}/${id}`);
 };

@@ -28,6 +28,11 @@ export default function moviesReducer(state = initialState, action) {
                     action.movie
                 ]
             }
+        case 'DELETE_MOVIE':
+            return {
+                ...state,
+                movies: state.movies.filter(movie => movie.id !== action.movie.id)
+            }
         default:
             return state;
     }

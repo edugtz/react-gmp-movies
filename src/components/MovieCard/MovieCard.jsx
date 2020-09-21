@@ -58,7 +58,7 @@ MovieCard.propTypes = {
     movie: PropTypes.shape({
         title: PropTypes.string.isRequired,
         genres: PropTypes.array.isRequired,
-        poster_path: PropTypes.string.isRequired,
+        poster_path: PropTypes.string,
         release_date: PropTypes.string.isRequired,
     }).isRequired
 }

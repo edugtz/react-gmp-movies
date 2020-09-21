@@ -92,7 +92,7 @@ const AddModal = props => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="movie-runtime">RUNTIME</label>
-                        <input id="movie-runtime" name="runtime" name={runtime} placeholder="Runtime here" type="text" onChange={onChange} />
+                        <input id="movie-runtime" name="runtime" value={runtime} placeholder="Runtime here" type="text" onChange={onChange} />
                     </div>
                 </div>
                 <div className="modal-footer">

@@ -1,4 +1,4 @@
-import { getMovies, updateMovie, createMovie } from '../../api/api';
+import { getMovies, updateMovie, createMovie, deleteMovie } from '../../api/api';
 
 const getMoviesAction = movies => ({
     type: 'GET_MOVIES',
@@ -12,6 +12,11 @@ const updateMovieAction = movieData => ({
 
 const createMovieAction = movieData => ({
     type: 'CREATE_MOVIE',
+    movie: movieData
+});
+
+const deleteMovieAction = movieData => ({
+    type: 'DELETE_MOVIE',
     movie: movieData
 });
 
@@ -48,6 +53,20 @@ export const createMovieData = data => {
         return createMovie(data)
             .then(response => {
                 dispatch(createMovieAction(response.data));
+
+                return response;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+}
+
+export const deleteMovieData = data => {
+    return dispatch => {
+        return deleteMovie(data.id)
+            .then(response => {
+                dispatch(deleteMovieAction(data));
 
                 return response;
             })
