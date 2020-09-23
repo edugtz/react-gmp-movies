@@ -1,8 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setSortByData, getMoviesData } from '../../redux/actions/movieActions';
 
 import './MovieFilters.scss';
 
-const MovieFilters = () => {
+const MovieFilters = props => {
+    // let sortBy = React.useRef('');
+
+    // React.useEffect(() => {
+    //     sortBy.current = props.sortBy;
+    // })
+
+    // React.useEffect(() => {
+    //     if (props.sortBy) {
+    //         sortBy.current = props.sortBy;
+    //     }
+    // }, [props.sortBy]);
+
+    const onFilterChange = (e) => {
+        const updatedSortBy = e.target.value;
+        props.setSortByData(updatedSortBy)
+        // console.log('Sort by: ', sortBy.current);
+        // props.getMoviesData(props.sortBy)
+        //     .then(() => {
+        //     })
+        //     .catch(err => {
+        //         console.log(err.message);
+        //     });
+    }
+
     return (
         <div className="movie-filters">
             <div className="left-section">
@@ -13,11 +40,31 @@ const MovieFilters = () => {
                 <p>CRIME</p>
             </div>
             <div className="right-section">
-                <p>SORT BY</p>
-                <p>RELEASE DATE</p>
+                <div>
+                    <p>SORT BY</p>
+                </div>
+                <div>
+                    <select id="sortMovieBy" name="sortBy" onChange={onFilterChange}>
+                        <option value="release_date">RELEASE DATE</option>
+                        <option value="vote_average">RATING</option>
+                    </select>
+                </div>
             </div>
         </div>
     )
 }
 
-export default MovieFilters;
+const mapStateToProps = (state) => {
+    return {
+        sortBy: state.movies.sortBy
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ setSortByData, getMoviesData }, dispatch);
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MovieFilters);

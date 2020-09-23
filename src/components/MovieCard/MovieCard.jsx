@@ -28,7 +28,7 @@ const MovieCard = props => {
     }
 
     return (
-        <div className="movie-card">
+        <div className="movie-card" onClick={() => props.updateSelectedMovie(props.movie)}>
             <div className="movie-options-wrapper">
                 <span onClick={toggleOpenMovieOptions} className="movie-options"><i className="fa fa-ellipsis-v"></i></span>
                 <Popover

@@ -1,5 +1,6 @@
 const initialState = {
-    movies: []
+    movies: [],
+    sortBy: 'release_date'
 };
 
 export default function moviesReducer(state = initialState, action) {
@@ -32,6 +33,11 @@ export default function moviesReducer(state = initialState, action) {
             return {
                 ...state,
                 movies: state.movies.filter(movie => movie.id !== action.movie.id)
+            }
+        case 'SET_SORT_BY':
+            return {
+                ...state,
+                sortBy: action.sortBy
             }
         default:
             return state;

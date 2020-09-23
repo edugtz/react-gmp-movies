@@ -39,7 +39,11 @@ const App = props => {
     }
 
     React.useEffect(() => {
-        props.getMoviesData()
+        const options = {
+            sortBy: props.sortBy
+        }
+
+        props.getMoviesData(options)
             .then(() => {
             })
             .catch(err => {
@@ -82,9 +86,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapStateToProps = (state) => {
-    const { movies } = state.movies;
+    const { movies, sortBy } = state.movies;
 
-    return { movies };
+    return { movies, sortBy };
 };
 
 export default connect(

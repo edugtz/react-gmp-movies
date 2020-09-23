@@ -20,6 +20,21 @@
     .right-section {
         display: flex;
         justify-content: space-between;
+        align-items: flex-start;
         width: 20%;
+        color: #555555;
+
+        select {
+            font-size: 1em;
+            width: 100%;
+            background-color: inherit;
+            color: #555555;
+            border: none;
+            border-radius: 3px;
+        }
+    }
+
+    .selected-filter {
+        color: #ffffff;
     }
 }

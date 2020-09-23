@@ -6,8 +6,8 @@ const ROUTES = {
     movies: 'movies',
 };
 
-export const getMovies = () => {
-    return api.get(`${baseUrl}/${ROUTES.movies}`, { params: { limit: 4000, offset: 1 } });
+export const getMovies = ({ sortBy }) => {
+    return api.get(`${baseUrl}/${ROUTES.movies}`, { params: { limit: 100, offset: 1, sortBy, sortOrder: 'desc' } });
 };
 
 export const createMovie = (data) => {

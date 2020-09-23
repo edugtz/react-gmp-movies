@@ -20,9 +20,14 @@ const deleteMovieAction = movieData => ({
     movie: movieData
 });
 
-export const getMoviesData = () => {
+export const setSortBy = (sortBy) => ({
+    type: 'SET_SORT_BY',
+    sortBy
+});
+
+export const getMoviesData = (options) => {
     return dispatch => {
-        return getMovies()
+        return getMovies(options)
             .then(response => {
                 dispatch(getMoviesAction(response.data.data));
 
@@ -67,6 +72,27 @@ export const deleteMovieData = data => {
         return deleteMovie(data.id)
             .then(response => {
                 dispatch(deleteMovieAction(data));
+
+                return response;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+}
+
+export const setSortByData = sortBy => {
+    return (dispatch, getState) => {
+        dispatch(setSortBy(sortBy));
+        const updatedState = getState();
+
+        const options = {
+            sortBy: updatedState.movies.sortBy
+        };
+
+        return getMovies(options)
+            .then(response => {
+                dispatch(getMoviesAction(response.data.data));
 
                 return response;
             })
