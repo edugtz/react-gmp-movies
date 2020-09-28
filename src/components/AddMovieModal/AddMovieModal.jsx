@@ -106,7 +106,7 @@ const AddMovieForm = ({ handleSubmit, resetForm }) => {
     )
 }
 
-const AddModal = (props) => {
+const AddMovieModal = (props) => {
     return (
         <Modal {...props}>
             <div className="add-movie-container">
@@ -160,7 +160,7 @@ const AddModal = (props) => {
     )
 }
 
-AddModal.propTypes = {
+AddMovieModal.propTypes = {
     toggleModalOpen: PropTypes.func.isRequired,
     isModalOpen: PropTypes.bool.isRequired,
 }
@@ -169,4 +169,4 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ createMovieData }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(AddModal)
+export default connect(null, mapDispatchToProps)(AddMovieModal)
