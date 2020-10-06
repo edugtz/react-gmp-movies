@@ -5,9 +5,11 @@
     .main-content {
         background-color: #232323;
         min-height: calc(100vh - 196px);
+        height: 100% !important;
 
-        .container {
-            height: 100%;
+        .main-app-container {
+            height: inherit !important;
+            min-height: inherit !important;
         }
     }
 }

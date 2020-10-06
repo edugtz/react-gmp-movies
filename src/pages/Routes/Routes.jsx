@@ -21,6 +21,7 @@ const Routes = (props) => {
     const [isEditModalOpen, setEditMovieModal] = React.useState(false)
 
     const toggleAddMovieModal = () => {
+        console.log('toggleAddMovieModal')
         setAddMovieModal((prevState) => !prevState)
     }
 
@@ -32,14 +33,6 @@ const Routes = (props) => {
         setEditMovieModal((prevState) => !prevState)
     }
 
-    const [selectedMovie, setSelectedMovie] = React.useState({})
-
-    const updateSelectedMovie = (movieData) => {
-        const foundMovie = movies.find((movie) => movie.id === movieData.id)
-
-        setSelectedMovie(foundMovie)
-    }
-
     const MoviesWrapper = (props) => {
         return (
             <MovieList
@@ -49,8 +42,6 @@ const Routes = (props) => {
                 toggleDeleteMovieModal={toggleDeleteMovieModal}
                 isEditModalOpen={isEditModalOpen}
                 toggleEditMovieModal={toggleEditMovieModal}
-                updateSelectedMovie={updateSelectedMovie}
-                selectedMovie={selectedMovie}
                 {...props}
             />
         )
@@ -58,18 +49,18 @@ const Routes = (props) => {
 
     return (
         <div id="app">
-            <Header
-                toggleAddMovieModal={toggleAddMovieModal}
-                updateSelectedMovie={updateSelectedMovie}
-            />
+            <Header toggleAddMovieModal={toggleAddMovieModal} />
             <div className="main-content">
-                <div className="container">
+                <div className="container main-app-container">
                     <MovieFilters />
                     <Switch>
                         <Route exact={true} path="/">
                             <MoviesWrapper movies={movies} />
                         </Route>
                         <Route path="/search/">
+                            <MoviesWrapper movies={movies} />
+                        </Route>
+                        <Route path="/film/:id">
                             <MoviesWrapper movies={movies} />
                         </Route>
                         <Route component={NotFound404} />

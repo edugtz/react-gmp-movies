@@ -1,0 +1,19 @@
+.not-found-404 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    height: inherit;
+    min-height: inherit !important;
+
+    .error-message-wrapper {
+        display: block;
+        text-align: center;
+
+        h1 {
+            padding: 10px 0;
+            font-size: 3em;
+        }
+    }
+}

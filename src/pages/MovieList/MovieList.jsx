@@ -7,20 +7,19 @@ import MovieCard from '../../components/MovieCard/MovieCard'
 import AddMovieModal from '../../components/AddMovieModal/AddMovieModal'
 import DeleteMovieModal from '../../components/DeleteMovieModal/DeleteMovieModal'
 import EditMovieModal from '../../components/EditMovieModal/EditMovieModal'
+import NoMovieResults from '../NoMovieResults/NoMovieResults'
 
 import './MovieList.scss'
 
 const MovieList = (props) => {
     const {
         movies,
-        selectedMovie,
         isAddMovieModalOpen,
         isDeleteModalOpen,
         isEditModalOpen,
         toggleAddMovieModal,
         toggleDeleteMovieModal,
         toggleEditMovieModal,
-        updateSelectedMovie,
     } = props
 
     return movies.length > 0 ? (
@@ -30,20 +29,21 @@ const MovieList = (props) => {
                     <b>{movies && movies.length}</b> movies found
                 </span>
             </div>
-            {selectedMovie && Object.keys(selectedMovie).length !== 0 && (
-                <>
-                    <DeleteMovieModal
-                        movie={selectedMovie}
-                        isModalOpen={isDeleteModalOpen}
-                        toggleModalOpen={toggleDeleteMovieModal}
-                    />
-                    <EditMovieModal
-                        movie={selectedMovie}
-                        isModalOpen={isEditModalOpen}
-                        toggleModalOpen={toggleEditMovieModal}
-                    />
-                </>
-            )}
+            {props.selectedMovie &&
+                Object.keys(props.selectedMovie).length !== 0 && (
+                    <>
+                        <DeleteMovieModal
+                            movie={props.selectedMovie}
+                            isModalOpen={isDeleteModalOpen}
+                            toggleModalOpen={toggleDeleteMovieModal}
+                        />
+                        <EditMovieModal
+                            movie={props.selectedMovie}
+                            isModalOpen={isEditModalOpen}
+                            toggleModalOpen={toggleEditMovieModal}
+                        />
+                    </>
+                )}
             <AddMovieModal
                 isModalOpen={isAddMovieModalOpen}
                 toggleModalOpen={toggleAddMovieModal}
@@ -53,14 +53,13 @@ const MovieList = (props) => {
                     <MovieCard
                         key={`${movie.title}${index}`}
                         movie={movie}
-                        updateSelectedMovie={updateSelectedMovie}
                         toggleDeleteMovieModal={toggleDeleteMovieModal}
                         toggleEditMovieModal={toggleEditMovieModal}
                     />
                 ))}
         </div>
     ) : (
-        <p>Empty movies</p>
+        <NoMovieResults />
     )
 }
 
@@ -71,8 +70,6 @@ MovieList.propTypes = {
     isDeleteModalOpen: PropTypes.bool.isRequired,
     toggleEditMovieModal: PropTypes.func.isRequired,
     isEditModalOpen: PropTypes.bool.isRequired,
-    updateSelectedMovie: PropTypes.func.isRequired,
-    selectedMovie: PropTypes.object,
     movies: PropTypes.arrayOf(
         PropTypes.shape({
             title: PropTypes.string.isRequired,
@@ -84,11 +81,12 @@ MovieList.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-    const { movies, totalMovies } = state.movies
+    const { movies, totalMovies, selectedMovie } = state.movies
 
     return {
         movies,
         totalMovies,
+        selectedMovie,
     }
 }
 

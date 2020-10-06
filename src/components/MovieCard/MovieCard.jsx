@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import * as moment from 'moment'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { useHistory } from 'react-router'
+
 import { setSelectedMovieData } from '../../redux/actions/movieActions'
 
 import './MovieCard.scss'
@@ -13,6 +15,7 @@ const MovieCard = (props) => {
     const { title, genres, poster_path, release_date } = props.movie
     const movieYear = moment(release_date).format('Y')
     const genresToBeDisplayed = genres.join(', ')
+    const history = useHistory()
 
     const toggleOpenMovieOptions = () => {
         setPopoverOpen((prevState) => !prevState)
@@ -31,6 +34,7 @@ const MovieCard = (props) => {
     }
 
     const onMovieClick = () => {
+        history.push(`/film/${props.movie.id}`)
         props.setSelectedMovieData(props.movie)
     }
 
