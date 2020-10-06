@@ -1,13 +1,19 @@
-import React from 'react';
+import React from 'react'
 
-import "./SearchBar.scss";
+import './SearchBar.scss'
 
-const SearchBar = () => {
+const SearchBar = (props) => {
     return (
         <div className="search-bar">
-            <input type="text" placeholder="What do you want to watch?" />
+            <input
+                value={props.searchValue}
+                onKeyDown={props.handleKeyPress}
+                onChange={(event) => props.setSearchValue(event.target.value)}
+                type="text"
+                placeholder="What do you want to watch?"
+            />
         </div>
     )
 }
 
-export default SearchBar;
+export default SearchBar

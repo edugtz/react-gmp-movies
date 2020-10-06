@@ -6,9 +6,15 @@ const ROUTES = {
     movies: 'movies',
 }
 
-export const getMovies = ({ sortBy }) => {
+export const getMovies = ({ sortBy, search }) => {
+    const params = {
+        limit: 9999,
+        ...(sortBy && { sortBy, sortOrder: 'desc' }),
+        ...(search && { search, searchBy: 'title' }),
+    }
+
     return api.get(`${baseUrl}/${ROUTES.movies}`, {
-        params: { limit: 9999, offset: 1, sortBy, sortOrder: 'desc' },
+        params,
     })
 }
 

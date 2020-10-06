@@ -1,36 +1,48 @@
-import React from "react";
-import PropTypes from "prop-types"
-import * as moment from 'moment';
+import React from 'react'
+import PropTypes from 'prop-types'
+import * as moment from 'moment'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { setSelectedMovieData } from '../../redux/actions/movieActions'
 
-import "./MovieCard.scss";
-import Popover from "../Common/Popover/Popover";
+import './MovieCard.scss'
+import Popover from '../Common/Popover/Popover'
 
-const MovieCard = props => {
-    const [isPopoverOpen, setPopoverOpen] = React.useState(false);
-    const { title, genres, poster_path, release_date } = props.movie;
-    const movieYear = moment(release_date).format('Y');
-    const genresToBeDisplayed = genres.join(", ");
+const MovieCard = (props) => {
+    const [isPopoverOpen, setPopoverOpen] = React.useState(false)
+    const { title, genres, poster_path, release_date } = props.movie
+    const movieYear = moment(release_date).format('Y')
+    const genresToBeDisplayed = genres.join(', ')
 
     const toggleOpenMovieOptions = () => {
-        setPopoverOpen(prevState => !prevState)
+        setPopoverOpen((prevState) => !prevState)
     }
 
     const onDeleteMovie = () => {
-        toggleOpenMovieOptions();
-        props.updateSelectedMovie(props.movie);
-        props.toggleDeleteMovieModal();
+        toggleOpenMovieOptions()
+        props.setSelectedMovieData(props.movie)
+        props.toggleDeleteMovieModal()
     }
 
     const onEditMovie = () => {
-        toggleOpenMovieOptions();
-        props.updateSelectedMovie(props.movie);
-        props.toggleEditMovieModal();
+        toggleOpenMovieOptions()
+        props.setSelectedMovieData(props.movie)
+        props.toggleEditMovieModal()
+    }
+
+    const onMovieClick = () => {
+        props.setSelectedMovieData(props.movie)
     }
 
     return (
-        <div className="movie-card" onClick={() => props.updateSelectedMovie(props.movie)}>
+        <div className="movie-card" onClick={onMovieClick}>
             <div className="movie-options-wrapper">
-                <span onClick={toggleOpenMovieOptions} className="movie-options"><i className="fa fa-ellipsis-v"></i></span>
+                <span
+                    onClick={toggleOpenMovieOptions}
+                    className="movie-options"
+                >
+                    <i className="fa fa-ellipsis-v"></i>
+                </span>
                 <Popover
                     toggleOpenMovieOptions={toggleOpenMovieOptions}
                     isPopoverOpen={isPopoverOpen}
@@ -51,7 +63,7 @@ const MovieCard = props => {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 MovieCard.propTypes = {
@@ -60,7 +72,11 @@ MovieCard.propTypes = {
         genres: PropTypes.array.isRequired,
         poster_path: PropTypes.string,
         release_date: PropTypes.string.isRequired,
-    }).isRequired
+    }).isRequired,
 }
 
-export default MovieCard;
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ setSelectedMovieData }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(MovieCard)

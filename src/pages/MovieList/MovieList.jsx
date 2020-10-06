@@ -1,20 +1,35 @@
-import React from "react";
-import PropTypes from "prop-types"
-import { connect } from 'react-redux';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import MovieCard from "../../components/MovieCard/MovieCard";
-import AddMovieModal from "../../components/AddMovieModal/AddMovieModal";
-import DeleteMovieModal from "../../components/DeleteMovieModal/DeleteMovieModal";
-import EditMovieModal from "../../components/EditMovieModal/EditMovieModal";
+import MovieCard from '../../components/MovieCard/MovieCard'
+import AddMovieModal from '../../components/AddMovieModal/AddMovieModal'
+import DeleteMovieModal from '../../components/DeleteMovieModal/DeleteMovieModal'
+import EditMovieModal from '../../components/EditMovieModal/EditMovieModal'
 
-import "./Movies.scss";
+import './MovieList.scss'
 
-const Movies = props => {
-    const { movies, selectedMovie, isAddMovieModalOpen, isDeleteModalOpen, isEditModalOpen, toggleAddMovieModal,
-        toggleDeleteMovieModal, toggleEditMovieModal, updateSelectedMovie } = props;
+const MovieList = (props) => {
+    const {
+        movies,
+        selectedMovie,
+        isAddMovieModalOpen,
+        isDeleteModalOpen,
+        isEditModalOpen,
+        toggleAddMovieModal,
+        toggleDeleteMovieModal,
+        toggleEditMovieModal,
+        updateSelectedMovie,
+    } = props
 
-    return (
+    return movies.length > 0 ? (
         <div className="movies">
+            <div className="movie-results-container">
+                <span className="movie-results">
+                    <b>{movies && movies.length}</b> movies found
+                </span>
+            </div>
             {selectedMovie && Object.keys(selectedMovie).length !== 0 && (
                 <>
                     <DeleteMovieModal
@@ -44,10 +59,12 @@ const Movies = props => {
                     />
                 ))}
         </div>
-    );
+    ) : (
+        <p>Empty movies</p>
+    )
 }
 
-Movies.propTypes = {
+MovieList.propTypes = {
     toggleAddMovieModal: PropTypes.func.isRequired,
     isAddMovieModalOpen: PropTypes.bool.isRequired,
     toggleDeleteMovieModal: PropTypes.func.isRequired,
@@ -56,25 +73,23 @@ Movies.propTypes = {
     isEditModalOpen: PropTypes.bool.isRequired,
     updateSelectedMovie: PropTypes.func.isRequired,
     selectedMovie: PropTypes.object,
-    movies: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        genres: PropTypes.array.isRequired,
-        poster_path: PropTypes.string,
-        release_date: PropTypes.string.isRequired,
-    })).isRequired
+    movies: PropTypes.arrayOf(
+        PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            genres: PropTypes.array.isRequired,
+            poster_path: PropTypes.string,
+            release_date: PropTypes.string.isRequired,
+        })
+    ).isRequired,
 }
 
-
 const mapStateToProps = (state) => {
-    const { movies, totalMovies } = state.movies;
+    const { movies, totalMovies } = state.movies
 
     return {
         movies,
-        totalMovies
-    };
-};
+        totalMovies,
+    }
+}
 
-export default connect(
-    mapStateToProps,
-    null
-)(Movies);
+export default withRouter(connect(mapStateToProps, null)(MovieList))

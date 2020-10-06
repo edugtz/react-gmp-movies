@@ -6,6 +6,12 @@
     display: flex;
     max-height: 400px;
 
+    .app-title {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     &:before {
         content: '';
         position: absolute;

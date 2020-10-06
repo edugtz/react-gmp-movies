@@ -1,14 +1,15 @@
-const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const path = require('path')
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-    mode: "production",
-    entry: path.join(__dirname, "src", "index.js"),
+    mode: 'production',
+    entry: path.join(__dirname, 'src', 'index.js'),
     output: {
-        path: path.join(__dirname, "dist"),
-        filename: "bundle.js"
+        path: path.join(__dirname, 'dist'),
+        filename: 'bundle.js',
+        publicPath: '/',
     },
     module: {
         rules: [
@@ -16,41 +17,44 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
-                }
+                    loader: 'babel-loader',
+                },
             },
             {
                 test: /.(css|scss)$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
             {
                 test: /.(jpg|jpeg|png|gif|mp3|svg)$/,
                 use: {
-                    loader: "file-loader"
-                }
+                    loader: 'file-loader',
+                },
             },
             {
                 test: /\.html$/,
                 use: {
-                    loader: "html-loader"
-                }
-            }
-        ]
+                    loader: 'html-loader',
+                },
+            },
+        ],
     },
     resolve: {
-        extensions: [".js", ".jsx"]
+        extensions: ['.js', '.jsx'],
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: path.join(__dirname, "public", "index.html"),
-            filename: "./index.html"
+            template: path.join(__dirname, 'public', 'index.html'),
+            filename: './index.html',
         }),
         new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[id].css"
+            filename: '[name].css',
+            chunkFilename: '[id].css',
         }),
         new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: ["dist"]
-        })
-    ]
-};
+            cleanOnceBeforeBuildPatterns: ['dist'],
+        }),
+    ],
+}
