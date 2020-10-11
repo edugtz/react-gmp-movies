@@ -22,44 +22,48 @@ const MovieList = (props) => {
         toggleEditMovieModal,
     } = props
 
-    return movies.length > 0 ? (
-        <div className="movies">
-            <div className="movie-results-container">
-                <span className="movie-results">
-                    <b>{movies && movies.length}</b> movies found
-                </span>
-            </div>
-            {props.selectedMovie &&
-                Object.keys(props.selectedMovie).length !== 0 && (
-                    <>
-                        <DeleteMovieModal
-                            movie={props.selectedMovie}
-                            isModalOpen={isDeleteModalOpen}
-                            toggleModalOpen={toggleDeleteMovieModal}
-                        />
-                        <EditMovieModal
-                            movie={props.selectedMovie}
-                            isModalOpen={isEditModalOpen}
-                            toggleModalOpen={toggleEditMovieModal}
-                        />
-                    </>
-                )}
+    return (
+        <>
             <AddMovieModal
                 isModalOpen={isAddMovieModalOpen}
                 toggleModalOpen={toggleAddMovieModal}
             />
-            {movies.length > 0 &&
-                movies.map((movie, index) => (
-                    <MovieCard
-                        key={`${movie.title}${index}`}
-                        movie={movie}
-                        toggleDeleteMovieModal={toggleDeleteMovieModal}
-                        toggleEditMovieModal={toggleEditMovieModal}
-                    />
-                ))}
-        </div>
-    ) : (
-        <NoMovieResults />
+            {movies.length > 0 ? (
+                <div className="movies">
+                    <div className="movie-results-container">
+                        <span className="movie-results">
+                            <b>{movies && movies.length}</b> movies found
+                        </span>
+                    </div>
+                    {props.selectedMovie &&
+                        Object.keys(props.selectedMovie).length !== 0 && (
+                            <>
+                                <DeleteMovieModal
+                                    movie={props.selectedMovie}
+                                    isModalOpen={isDeleteModalOpen}
+                                    toggleModalOpen={toggleDeleteMovieModal}
+                                />
+                                <EditMovieModal
+                                    movie={props.selectedMovie}
+                                    isModalOpen={isEditModalOpen}
+                                    toggleModalOpen={toggleEditMovieModal}
+                                />
+                            </>
+                        )}
+                    {movies.length > 0 &&
+                        movies.map((movie, index) => (
+                            <MovieCard
+                                key={`${movie.title}${index}`}
+                                movie={movie}
+                                toggleDeleteMovieModal={toggleDeleteMovieModal}
+                                toggleEditMovieModal={toggleEditMovieModal}
+                            />
+                        ))}
+                </div>
+            ) : (
+                <NoMovieResults />
+            )}
+        </>
     )
 }
 
