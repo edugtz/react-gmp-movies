@@ -1,21 +1,21 @@
 import { getMovies, updateMovie, createMovie, deleteMovie } from '../../api/api'
 
-const getMoviesAction = (movies) => ({
+export const getMoviesAction = (movies) => ({
     type: 'GET_MOVIES',
     movies,
 })
 
-const updateMovieAction = (movieData) => ({
+export const updateMovieAction = (movieData) => ({
     type: 'UPDATE_MOVIE',
     movie: movieData,
 })
 
-const createMovieAction = (movieData) => ({
+export const createMovieAction = (movieData) => ({
     type: 'CREATE_MOVIE',
     movie: movieData,
 })
 
-const deleteMovieAction = (movieData) => ({
+export const deleteMovieAction = (movieData) => ({
     type: 'DELETE_MOVIE',
     movie: movieData,
 })
@@ -65,9 +65,11 @@ export const updateMovieData = (data) => {
 }
 
 export const createMovieData = (data) => {
+    console.log(data)
     return async (dispatch) => {
         try {
-            const response = createMovie(data)
+            const response = await createMovie(data)
+            console.log(response)
             dispatch(createMovieAction(response.data))
             return response
         } catch (error) {
@@ -79,7 +81,7 @@ export const createMovieData = (data) => {
 export const deleteMovieData = (data) => {
     return async (dispatch) => {
         try {
-            const response = deleteMovie(data)
+            const response = await deleteMovie(data)
             dispatch(deleteMovieAction(data))
             return response
         } catch (error) {
