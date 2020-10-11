@@ -65,11 +65,9 @@ export const updateMovieData = (data) => {
 }
 
 export const createMovieData = (data) => {
-    console.log(data)
     return async (dispatch) => {
         try {
             const response = await createMovie(data)
-            console.log(response)
             dispatch(createMovieAction(response.data))
             return response
         } catch (error) {
