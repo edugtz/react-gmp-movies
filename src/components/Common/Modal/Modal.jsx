@@ -1,19 +1,19 @@
-import React from 'react';
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import "./Modal.scss"
+import './Modal.scss'
 
 // Custom hook
 function usePrevious(value) {
-    const ref = React.useRef();
+    const ref = React.useRef()
     React.useEffect(() => {
-        ref.current = value;
-    });
-    return ref.current;
+        ref.current = value
+    })
+    return ref.current
 }
 
-const Modal = props => {
-    const prevIsModalOpen = usePrevious(props.isModalOpen);
+const Modal = (props) => {
+    const prevIsModalOpen = usePrevious(props.isModalOpen)
 
     React.useEffect(() => {
         if (props.isModalOpen) {
@@ -21,9 +21,9 @@ const Modal = props => {
         }
 
         return () => {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = 'unset'
         }
-    }, []);
+    }, [])
 
     React.useEffect(() => {
         if (prevIsModalOpen !== props.isModalOpen && props.isModalOpen) {
@@ -31,29 +31,33 @@ const Modal = props => {
         } else document.body.style.overflow = 'unset'
     }, [props.isModalOpen])
 
-
     return (
         <>
-            {props.isModalOpen &&
+            {props.isModalOpen && (
                 <div className="overlay">
                     <div className="modal-content">
                         <div className="close-icon-wrapper">
-                            <span onClick={props.toggleModalOpen} className="close-modal">
-                                <i className="fa fa-times"></i>
+                            <span
+                                onClick={props.toggleModalOpen}
+                                className="close-modal"
+                            >
+                                <i
+                                    data-testid="close-icon"
+                                    className="fa fa-times"
+                                ></i>
                             </span>
                         </div>
                         {props.children}
                     </div>
                 </div>
-            }
+            )}
         </>
-
-    );
+    )
 }
 
 Modal.propTypes = {
     toggleModalOpen: PropTypes.func.isRequired,
-    isModalOpen: PropTypes.bool.isRequired
+    isModalOpen: PropTypes.bool.isRequired,
 }
 
-export default Modal;
+export default Modal

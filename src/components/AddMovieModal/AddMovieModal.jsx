@@ -21,6 +21,7 @@ const AddMovieForm = ({ handleSubmit, resetForm }) => {
                     name="title"
                     placeholder="Movie Title"
                     type="text"
+                    data-testid="movie-title-input"
                 />
                 <ErrorMessage name="title">
                     {(msg) => <div className="field-error">{msg}</div>}
@@ -98,7 +99,11 @@ const AddMovieForm = ({ handleSubmit, resetForm }) => {
                 >
                     RESET
                 </button>
-                <button className="submit-button" type="submit">
+                <button
+                    data-testid="submit-add-form"
+                    className="submit-button"
+                    type="submit"
+                >
                     SUBMIT
                 </button>
             </div>
@@ -111,7 +116,9 @@ const AddMovieModal = (props) => {
         <Modal {...props}>
             <div className="add-movie-container">
                 <div className="modal-header">
-                    <h2 className="modal-title">ADD MOVIE</h2>
+                    <h2 id="modal-title" className="modal-title">
+                        ADD MOVIE
+                    </h2>
                 </div>
                 <div className="modal-body">
                     <Formik
